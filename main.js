@@ -15,25 +15,7 @@ function starsRating(num) {
             each.style.color = 'gray';
         }
     }
-    //The following for loop that is commented out was intended to achieve a hover effect in a 
-    //particular case. Imagine the end user gives a rating of 5 stars, then decides to give a 
-    //rating of 4 stars, then decides again to give 5 stars. The idea is that, after having just given
-    // a 4 star rating, when the user hovers their mouse over the fifth star the star will highlight yellow.
-    // Unfortunately, I cannot get it to work.
-
-
-    // for (let each of stars) {
-    //     if (each.classList.contains('far') == true && each.style.color == 'gray' && each.classList.contains('fas') === false) {
-    //         each.addEventListener('mouseenter', () => {
-    //             each.style.color = 'yellow';
-    //         })
-    //     }
-    //     if (each.classList.contains('far') === true && each.style.color == 'yellow' && each.classList.contains('fas') === false) {
-    //         each.addEventListener('mouseleave', () => {
-    //             each.style.color = 'gray';
-    //         })
-    //     }
-    // }
+    
     for (let each of stars) {
         if (stars.indexOf(each) == num) {
             break;
@@ -42,6 +24,35 @@ function starsRating(num) {
         each.classList.add('fas');
         each.style.color = 'yellow';
         each.style.display = 'flex';
+    }
+
+    let i = 0;
+    for (let each of stars) {
+        if (each.classList.contains('fas') == true && each.classList.contains('far') == false) {
+            i += 1;
+        }
+    }
+    
+    let u = stars.length -i;
+    
+    let final__arr = [];
+    for (let o = (stars.length); u > 0; u -= 1) {
+        let new_addition = stars[o-u];
+        final__arr.push(new_addition);
+    }
+    
+    for (let each of final__arr) {
+        each.addEventListener('mouseenter', () => {
+            if (each.classList.contains('far') == true && each.classList.contains('fas') == false) {
+                each.setAttribute('style', 'color: yellow');
+            }
+        })
+        each.addEventListener('mouseleave', () => {
+            if (each.classList.contains('far') == true && each.classList.contains('fas') == false){
+                each.setAttribute('style', 'color: gray');
+                each.setAttribute('style', 'display: flex');
+            }
+        }) 
     }
     
 }
